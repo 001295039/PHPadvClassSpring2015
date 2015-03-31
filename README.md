@@ -1,2 +1,2 @@
 # PHPadvClassSpring2015
-#Don't push 
+#Don't push the properties
