@@ -1,4 +1,5 @@
 <?php include './bootstrap.php'; ?>
+<?PHP include 'emailTypeDB.php'; ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,6 +11,7 @@
     <?php
     $util = new Util();
     $validator = new Validator();
+    $EmailType = new emailTypeDB();
     $emailType = filter_input(INPUT_POST, 'emailtype');
     $errors = array();
 
@@ -27,7 +29,13 @@
     
     else {
     
-    //save to to database.
+       
+        
+    $EmailType->Save2DB($emailType);
+    /*$out = Save2DB($emailType);
+    echo $out;*/
+    
+    /*/save to to database.
     $dbConfig = array(
         "DB_DNS"=>'mysql:host=localhost;port=3306;dbname=PHPadvClassSpring2015',
         "DB_USER"=>'root',
@@ -37,12 +45,12 @@
     
     $pdo = new DB($dbConfig);
     $db = $pdo->getDB();
-    $stmt = $db->prepare("INSERT INTO emailtype SET emailtype = :emailtype");  
-                    
+    $stmt = $db->prepare("INSERT INTO emailtype SET emailtype = :emailtype");          
     $values = array(":emailtype"=>$emailType);
 
+    
     if ( $stmt->execute($values) && $stmt->rowCount() > 0 ) 
-        {echo 'Email Added';}       
+        {echo 'Email Added';} */      
     }
     ?>  
     
@@ -57,7 +65,9 @@
     
     <?php 
     
-    $dbConfig = array(
+    
+    $EmailType->DispFroDB();
+    /*$dbConfig = array(
         "DB_DNS" => 'mysql:host=localhost;port=3306;dbname=PHPadvClassSpring2015',
         "DB_USER" => 'root', 
         "DB_PASSWORD" => '');
@@ -74,7 +84,7 @@
             {echo '<p>', $value['emailtype'], '</p>';}
     } 
     else 
-    {echo '<p>No Data</p>';}
+    {echo '<p>No Data</p>';}*/
     
     
     ?>
