@@ -45,14 +45,17 @@ class emailTypeDB {
 
     $pdo = new DB($dbConfig);
     $db = $pdo->getDB();
-    $stmt = $db->prepare("SELECT * FROM emailtype where active = 1");
+    $stmt = $db->prepare("SELECT * FROM emailtype where 1 = 1");
 
     if ($stmt->execute() && $stmt->rowCount() > 0) 
     {
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($results as $value) 
+        {if ($value['active'] == 1)
             {echo '<p><strong>', $value['emailtype'], '</strong></p>';}
+        else
+            echo '<p>', $value['emailtype'], '</p>';}
     } 
     else 
     {echo '<p>No Data</p>';} 
