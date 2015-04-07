@@ -21,6 +21,7 @@
         $active = filter_input(INPUT_POST, 'active');
         
         $util = new Util();
+        $phoneTypeDAO = new PhoneTypeDAO($db);
        
             
             if ( $util->isPostRequest() ) {
@@ -45,8 +46,7 @@
                     * Fax,Home,Moble,Pager,Work
                     */
                    
-                    $phoneTypeDAO = new PhoneTypeDAO($db);
-                   
+                                       
                     $phonetypeModel = new PhoneTypeModel();
                     $phonetypeModel->setActive($active);
                     $phonetypeModel->setPhonetype($phoneType);
@@ -79,18 +79,34 @@
          
          
          <?php         
-             $stmt = $db->prepare("SELECT * FROM phonetype");
-         
+             
+            $phoneTypes = $phoneTypeDAO->getAllRows();
+            
+           /* echo $phoneTypes[0]->getPhonetype();
+            echo $phoneTypes[1]->getPhonetype();
+            echo $phoneTypes[2]->getPhonetype();
+            */
+            foreach ($phoneTypes as $value) {
+                echo '<p>',$value->getPhonetype(),'</p>';
+            }
+            
+           // var_dump($phoneTypes);
+            
+            /*
+             foreach ($phoneTypes as $value) {
+                    echo '<p>',$value['phonetype'],'</p>';
+                }
+            
             if ( $stmt->execute() && $stmt->rowCount() > 0 ) {
                 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                 foreach ($results as $value) {
-                       echo '<p>',$value['phonetype'],'</p>';
-                   }
+                
 
             } else {
                 echo '<p>No Data</p>';
             }
+             * 
+             */
          ?>
          
          

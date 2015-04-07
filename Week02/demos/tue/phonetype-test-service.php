@@ -28,6 +28,7 @@
         $phonetypeModel->setActive($active);
         $phonetypeModel->setPhonetype($phoneType);
 
+        
         $phoneTypeService = new PhoneTypeService($db, $util, $validator, $phoneTypeDAO, $phonetypeModel);
         
         $phoneTypeService->saveForm();
