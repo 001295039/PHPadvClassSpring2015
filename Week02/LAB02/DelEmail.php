@@ -15,25 +15,48 @@ include './bootstrap.php';
     <body>
         <?php 
         
-        Echo "Email Deleted";
-        $emailid = filter_input(INPUT_GET, 'emailid'); 
-        Echo $emailid;
+        
+//        $emailid = filter_input(INPUT_GET, 'emailid'); 
+//        Echo $emailid;
+//        $dbConfig = array(
+//            "DB_DNS"=>'mysql:host=localhost;port3306;dbname=PHPadvClassSpring2015',
+//            "DB_USER"=>'root',
+//            "DB_PASSWORD"=>''
+//            );
+//        
+//        $pdo = new DB($dbConfig);
+//                
+//        $db = $pdo->getDB();
+//        
+//        $emailDAO = new emailDAO($db);
+//        
+//        if ($emailDAO->delete($emailid) === true)
+//        {echo "Email Deleted";}
+        
+        
+        
+        
+        $emailid = filter_input(INPUT_GET, 'emailid');
+                   
         $dbConfig = array(
-            "DB_DNS"=>'mysql:host=localhost;port3306;dbname=PHPadvClassSpring2015',
+            "DB_DNS"=>'mysql:host=localhost;port=3306;dbname=PHPadvClassSpring2015',
             "DB_USER"=>'root',
             "DB_PASSWORD"=>''
-            );
+        );
         
         $pdo = new DB($dbConfig);
         $db = $pdo->getDB();
         
-        $emailDAO = new EmailDAO($db);
-        $emailDAO->delete($emailid);
+         $emailDAO = new emailDAO($db);
+           if ($emailDAO->delete($emailid))
+           {echo "Email Deleted";}
+        
+        
+        
+        
+        
         ?>
+        <br />
         <a href="index.php">Back to main</a>
     </body>
 </html>
-
-
-
-
