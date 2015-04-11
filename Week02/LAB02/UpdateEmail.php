@@ -12,16 +12,40 @@ $dbConfig = array(
     $pdo = new DB($dbConfig);
     $db = $pdo->getDB();
     $emailDAO = new EmailDAO($db);
+    $util = new Util();
     
   $emailTypeDAO = new EmailTypeDAO($db);
-  $emailTypes = $emailTypeDAO->getAllRows();   
-  $email = filter_input(INPUT_POST, 'email');
+  $emailTypes = $emailTypeDAO->getAllRows(); 
+  
+        $email = filter_input(INPUT_POST, 'email');
+  
+  
         $emailTypeid = filter_input(INPUT_POST, 'emailtypeid');
         $active = filter_input(INPUT_POST, 'active');
+        $EmailType = filter_input(INPUT_POST, 'emailtype');//
         
-        $emailid = filter_input(INPUT_GET, 'emailid');
         
-        var_dump($emailDAO->getById($emailid));
+        $emailModel = new EmailModel();
+        
+        if ($util->isPostRequest())
+        {$emailModel->map(filter_input_array(INPUT_POST));//$emailDAO->getById($emailid));
+        }
+        else
+        {$emailid = filter_input(INPUT_GET, 'emailid');
+        $emailModel = $emailDAO->getById($emailid);
+        }
+        
+        $email = $emailModel->getEmail();
+        var_dump($email);
+        $active = $emailModel->getActive();
+        $emailid = $emailModel->getEmailid();
+        $EmailType = $emailModel->getEmailtype();
+        $emailTypeid = $emailModel->getEmailtype();
+        
+        if ( $util->isPostRequest() ) {
+        if ( $emailDAO->save($emailmodel) ) {
+        echo 'Email Updated';}}
+        
 ?>
 <!DOCTYPE html>
 <!--
@@ -45,7 +69,7 @@ and open the template in the editor.
 <input type="number" max="1" min="0" name="active" value="<?php echo $active; ?>" />
 <br /><br />
 <label>Email Type:</label>
-<select name="emailtypeid">
+<select name="emailtypeid" value="<?php echo $emailTypeid; ?>">
 <?php 
         
                 foreach ($emailTypes as $value) {

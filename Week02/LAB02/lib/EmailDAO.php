@@ -63,6 +63,35 @@ class EmailDAO implements IDAO {
          $values = array( ":email" => $model->getEmail(),
                           ":active" => $model->getActive(),
                           ":emailtypeid" => $model->getEmailtypeid(),
+                          ":emailid" => $model->getEmailid(),
+                    );
+         
+                
+         if ( $this->idExisit($model->getEmailid()) ) {
+             $values[":emailid"] = $model->getEmailid();
+             $stmt = $db->prepare("UPDATE email SET email = :email, emailtypeid = :emailtypeid,  active = :active, lastupdated = now() WHERE emailid = :emailid");
+         } else {             
+             $stmt = $db->prepare("INSERT INTO email SET email = :email, emailtypeid = :emailtypeid, active = :active, logged = now(), lastupdated = now()");
+         }
+         
+          
+         if ( $stmt->execute($values) && $stmt->rowCount() > 0 ) {
+            return true;
+         }
+         
+         return false;
+    }
+    
+    
+    
+    
+    public function update(IModel $model) {//////////////
+                 
+         $db = $this->getDB();
+         
+         $values = array( ":email" => $model->getEmail(),
+                          ":active" => $model->getActive(),
+                          ":emailtypeid" => $model->getEmailtypeid(),
              
                     );
          
@@ -81,6 +110,9 @@ class EmailDAO implements IDAO {
          
          return false;
     }
+    
+    
+    
     
     
     public function delete($id) {
