@@ -1,5 +1,7 @@
 <?php
+namespace week2\cprince;
 include './bootstrap.php';
+use PDO;
 /* 
  * DelEmail
  * 

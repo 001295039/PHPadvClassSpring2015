@@ -1,4 +1,5 @@
 <?php
+namespace week2\cprince;
 /**
  * Interface for Database Access Object
  * 

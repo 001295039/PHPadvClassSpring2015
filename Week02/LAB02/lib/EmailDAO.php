@@ -1,4 +1,6 @@
 <?php
+namespace week2\cprince;
+use PDO;
 /**
  * EmailDAO
  * 

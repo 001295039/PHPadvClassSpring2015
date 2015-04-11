@@ -1,5 +1,6 @@
 <?php
-
+namespace week2\cprince;
+use PDO;
 /**
  * DB is the general class to connection to our database
  *

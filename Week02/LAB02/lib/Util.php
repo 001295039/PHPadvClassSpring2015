@@ -1,4 +1,5 @@
 <?php
+namespace week2\cprince;
 
 /**
  * Util - functions used to help with the over all application

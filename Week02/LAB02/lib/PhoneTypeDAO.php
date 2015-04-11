@@ -1,4 +1,5 @@
 <?php
+namespace week2\cprince;
 /**
  * Description of PhoneTypeDAO
  * 

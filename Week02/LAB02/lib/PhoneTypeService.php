@@ -1,4 +1,5 @@
 <?php
+namespace week2\cprince;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
