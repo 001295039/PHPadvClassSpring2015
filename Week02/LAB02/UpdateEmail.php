@@ -29,6 +29,29 @@ $dbConfig = array(
         
         if ($util->isPostRequest())
         {$emailModel->map(filter_input_array(INPUT_POST));//$emailDAO->getById($emailid));
+        
+        
+        
+        //if($emailDAO->idExisit($emailModel->getEmailid()))
+          //             {
+            //               
+              //              $emailModel->map(filter_input_array(INPUT_POST));            
+                //            /*$email = $emailModel->setEmail();
+                  //          $active = $emailModel->setActive();
+                    //        $emailTypeid = $emailModel->setEmailtypeid();
+                      //      $emailType = $emailModel->setEmailtype();*/
+                        //    
+                          // if($emailDAO->save($emailModel));
+                            //{
+                              //  echo "Email Updated.";
+                            //}
+                        //}
+        
+        
+        
+        
+        
+        
         }
         else
         {$emailid = filter_input(INPUT_GET, 'emailid');
