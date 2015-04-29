@@ -34,9 +34,7 @@ use PDO;
         $emailTypes = $emailTypeDAO->getAllRows();
         
         if($util->isPostRequest())
-        {
-            $emailModel->map(filter_input_array(INPUT_POST));
-        }
+        {$emailModel->map(filter_input_array(INPUT_POST));}
         else
         {
             $emailid = filter_input(INPUT_GET, 'emailid');
@@ -60,43 +58,24 @@ use PDO;
             $active = filter_input(INPUT_POST, 'active');
             
             if(!$validator->emailIsValid($email))
-            {
-                $errors[] = 'Email is Invalid.';
-            }
+            {$errors[] = 'Email is Invalid.';}
             
             if(!$validator->activeIsValid($active))
-            {
-                $errors[] = 'Active is invalid';
-            }
+            {$errors[] = 'Active is invalid';}
 
-            
             if(count($errors) > 0 )
             {
                 foreach ($errors as $value)
-                {
-                  
-                    echo'<p>',$value,'</p>';
-                }
+                {echo'<p>',$value,'</p>';}
             }
             else 
             {
-                 
-                       
-                     
-                       if($emailDAO->idExisit($emailModel->getEmailid()))
-                       {
-                           
-                            $emailModel->map(filter_input_array(INPUT_POST));            
-                            /*$email = $emailModel->setEmail();
-                            $active = $emailModel->setActive();
-                            $emailTypeid = $emailModel->setEmailtypeid();
-                            $emailType = $emailModel->setEmailtype();*/
-                            
-                           if($emailDAO->save($emailModel));
-                            {
-                                echo "Email Updated.";
-                            }
-                        }
+            if($emailDAO->idExisit($emailModel->getEmailid()))
+            {
+            $emailModel->map(filter_input_array(INPUT_POST));            
+            if($emailDAO->save($emailModel));
+            {echo "Email Updated.";}
+            }
             }
         }
         
@@ -120,11 +99,9 @@ use PDO;
                 foreach ($emailTypes as $value) 
                     {
                     if ( $value->getEmailtypeid() == $emailTypeid) 
-                    {
-                        echo '<option value="',$value->getEmailtypeid(),'" selected="selected">',$value->getEmailtype(),'</option>';  
-                    } else {
-                        echo '<option value="',$value->getEmailtypeid(),'">',$value->getEmailtype(),'</option>';
-                    }
+                    {echo '<option value="',$value->getEmailtypeid(),'" selected="selected">',$value->getEmailtype(),'</option>';  } 
+                    else 
+                        {echo '<option value="',$value->getEmailtypeid(),'">',$value->getEmailtype(),'</option>';}
                 }
             ?>
             </select>
@@ -133,9 +110,8 @@ use PDO;
             <input type="submit" value="Submit" />
         </form>
         
-        
         <?php
-       echo '<p><a href="index.php">Back to Previous Page</a></p>';
+       echo '<p><a href="index.php">Back to main</a></p>';
         ?>
     </body>
 </html>

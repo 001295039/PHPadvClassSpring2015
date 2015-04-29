@@ -40,7 +40,7 @@ include './bootstrap.php';
                 if( !$validator->emailIsValid($email) ) 
                     { $errors[] = 'Email is invalid';} 
                 
-                if ( !$validator->activeIsValid($active) ) //$active        $emailtypeid
+                if ( !$validator->activeIsValid($active) )
                     {$errors[] = 'Active is invalid';}
                 
                 if ( empty($emailTypeid) ) {
