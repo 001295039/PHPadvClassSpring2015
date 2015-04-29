@@ -17,7 +17,8 @@ include './bootstrap.php';
     "DB_PASSWORD"=>''
         );
         
-        /*$pdo = new DB($dbConfig);
+    
+        $pdo = new DB($dbConfig);
         $db = $pdo->getDB();
         
         
@@ -69,95 +70,15 @@ include './bootstrap.php';
                     }
                     
                 }
-          }//*/
+          }//
     
     
     
     
-    $pdo = new DB($dbConfig);
-        $db = $pdo->getDB();
-        
-        $email = filter_input(INPUT_POST, 'email');
-        $emailtypeid = filter_input(INPUT_POST, 'emailtypeid');
-        $active = filter_input(INPUT_POST, 'active');
-        
-        $util = new Util();
-        $emailTypeDAO = new EmailTypeDAO($db);
-        $emailDAO = new EmailDAO($db);
-        
-        $emailTypes = $emailTypeDAO->getAllRows();
-        
-        if($util->isPostRequest())
-        {
-            $validator = new Validator();
-            $errors = array();
-            
-            if(!$validator->emailIsValid($email))
-            {
-                $errors[] = 'Email is invalid.';
-            }
-            
-            if(!$validator->emailTypeIsValid($emailtypeid))
-            {
-                $errors[] = 'Email type is invalid';
-            }
-            
-            if(!$validator->activeIsValid($active))
-            {
-                $errors[] = 'Active is invalid';
-            }
-            
-            if(count($errors) > 0)
-            {
-                foreach($errors as $value)
-                    echo'<p>', $value ,'</p>';
-            }
-            else
-            {
-                $emailModel = new EmailModel();
-                
-                $emailModel->map(filter_input_array(INPUT_POST));
-                
-                
-                if($emailDAO->save($emailModel))
-                {
-                    echo'Email added.';
-                }
-            }
-            
-            
-            }
+    
         ?>
         
-        <h3>Add Email</h3>
-        <form action="#" method="post">
-            <label>Email:</label>            
-            <input type="text" name="email" value="<?php echo $email; ?>" placeholder="" />
-            
-            <br /><br />
-            
-            <label>Active:</label>
-            <input type="number" max="1" min="0" name="active" value="<?php echo $active; ?>" />
-            
-            <br /><br />
-            
-            <label>Email Type:</label>
-            <select name="emailtypeid">
-            <?php 
-                foreach ($emailTypes as $value) 
-                    {
-                    if ( $value->getEmailtypeid() == $emailtypeid) 
-                    {
-                        echo '<option value="',$value->getEmailtypeid(),'" selected="selected">',$value->getEmailtype(),'</option>';  
-                    } else {
-                        echo '<option value="',$value->getEmailtypeid(),'">',$value->getEmailtype(),'</option>';
-                    }
-                }
-    
-    
-    
         
-        ?>
         
         
 <h3>Add email</h3>

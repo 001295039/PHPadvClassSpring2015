@@ -54,7 +54,7 @@ class EmailTypeDAO implements IDAO {
     
     public function save(IModel $model) {
                  
-         $db = $this->getDB();
+         /*$db = $this->getDB();
          
          $values = array( ":emailtype" => $model->getEmailtype(),
                           ":active" => $model->getActive()
@@ -68,12 +68,39 @@ class EmailTypeDAO implements IDAO {
              $stmt = $db->prepare("INSERT INTO emailtype SET emailtype = :emailtype, active = :active");
          }
          
-          
-         if ( $stmt->execute($values) && $stmt->rowCount() > 0 ) {
+         if ( $stmt->execute($values) && $stmt->rowCount() > 0 ) 
+             {
             return true;
          }
          
-         return false;
+         return false;*/
+        
+        
+        $db = $this->getDB();
+        
+        $values = array(":emailtype" => $model->getEmailType(),
+                         ":active" => $model->getActive());
+        
+        if ($this->idExisit($model->getEmailtypeid())) 
+        {
+            $values[":emailtypeid"] = $model->getEmailtypeid();
+            $stmt = $db->prepare("UPDATE emailtype SET emailtype = :emailtype, active = :active WHERE emailtypeid = :emailtypeid");
+        }
+        else
+        {
+            $stmt = $db->prepare("INSERT INTO emailtype SET emailtype = :emailtype, active = :active" );
+        }
+        
+        
+        
+        if ($stmt->execute($values) && $stmt->rowCount() > 0 )
+        {
+            return true;
+        }
+        
+        return false;
+        
+        
     }
     
     
