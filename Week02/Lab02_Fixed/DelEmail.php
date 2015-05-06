@@ -52,11 +52,6 @@ use PDO;
          $emailDAO = new emailDAO($db);
            if ($emailDAO->delete($emailid))
            {echo "Email Deleted";}
-        
-        
-        
-        
-        
         ?>
         <br />
         <a href="index.php">Back to main</a>

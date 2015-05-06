@@ -118,5 +118,8 @@ include './bootstrap.php';
                 {echo '<tr><td>',$value->getEmail(),'</td><td>',$value->getEmailtype(),'</td><td>',date("F j, Y g:i(s) a", strtotime($value->getLastupdated())),'</td><td>',date("F j, Y g:i(s) a", strtotime($value->getLogged())),'</td>';
                  echo  '<td>', ( $value->getActive() == 1 ? 'Yes' : 'No') ,'</td>     <td> <a href=DelEmail.php?emailid=',$value->getEmailid(),'>Delete</a> </td>           <td> <a href=UpdateEmail.php?emailid=',$value->getEmailid(),'>Update</a> </td>              </tr>' ;} ?>
 </table>
+
+<br /><br /><a href="EmailType.php">Email Types</a>
+
 </body>
 </html>
