@@ -57,7 +57,7 @@ use Exception;
                        
             $class_name = $this->getPageController($page);
             $controller = NULL;
-                       
+            
             
             if (array_key_exists($class_name,$this->DI)) {                
                 $controller = $this->DI[$class_name]();                
