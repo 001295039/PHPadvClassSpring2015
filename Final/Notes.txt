@@ -4,3 +4,22 @@ Looks Pretty
 Possibly pictures
 Possibly javascript
 
+
+view - anyone
+CRUD - logged in
+
+
+Database
+[record id]
+[Firearm name]
+[caliber]
+[serial num]
+[manufacturer]
+[sale price]
+[user id] - of posting user
+
+
+login
+[user id]
+[user name]
+[level]?
