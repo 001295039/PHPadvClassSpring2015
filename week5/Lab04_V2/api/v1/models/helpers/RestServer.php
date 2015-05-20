@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of EmailTypeRestServer
+ * Description of PhoneTypeRestServer
  *
  * @author User
  */

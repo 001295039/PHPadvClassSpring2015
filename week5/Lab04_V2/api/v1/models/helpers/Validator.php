@@ -33,11 +33,11 @@ class Validator implements IService {
      * @return boolean
      */
     public function phoneIsValid($phone) {
-        return ( preg_match("/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/", $phone) ); //^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$
+        return ( preg_match("/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/", $phone) );
     }
     
     /**
-     * A method to check if a email type is valid.
+     * A method to check if a phone type is valid.
      *
      * @param {String} [$type] - must be a valid string
      *
@@ -48,7 +48,7 @@ class Validator implements IService {
     }
     
     /**
-     * A method to check if a email type is valid.
+     * A method to check if a phone type is valid.
      *
      * @param {String} [$type] - must be a valid string
      *
