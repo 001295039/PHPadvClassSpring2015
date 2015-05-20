@@ -23,3 +23,12 @@
 [555bd40803e67]	[exception]	[05-20-2015 2:23am]	17 ID does not exist
 [555bd506c6cb5]	[exception]	[05-20-2015 2:27am]	New Email Not Created
 [555bd54336ea2]	[exception]	[05-20-2015 2:28am]	3 ID does not exist
+[555bdd1e60e0e]	[exception]	[05-20-2015 3:02am]	New Email Type Not Created
+[555bdd20f0d5f]	[exception]	[05-20-2015 3:02am]	New Email Type Not Created
+[555bdd2162830]	[exception]	[05-20-2015 3:02am]	New Email Type Not Created
+[555bdd21933f3]	[exception]	[05-20-2015 3:02am]	New Email Type Not Created
+[555bdd21c3fb6]	[exception]	[05-20-2015 3:02am]	New Email Type Not Created
+[555bdd21ed0cf]	[exception]	[05-20-2015 3:02am]	New Email Type Not Created
+[555bdd222df14]	[exception]	[05-20-2015 3:02am]	New Email Type Not Created
+[555bdd67a82ec]	[exception]	[05-20-2015 3:03am]	New Email Type Not Updated for id 19
+[555bdd7184f72]	[exception]	[05-20-2015 3:03am]	New Email Type Not Updated for id 19

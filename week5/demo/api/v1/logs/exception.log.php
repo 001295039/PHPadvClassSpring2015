@@ -15,3 +15,6 @@
 [55400f32794d4]	[exception]	[04-29-2015 12:52am]	Invalid credentials
 [555bd0b15661d]	[exception]	[05-20-2015 2:09am]	New Phone Type Not Created
 [555bd0bf2ffbc]	[exception]	[05-20-2015 2:09am]	0 ID does not exist
+[555bd85204e88]	[exception]	[05-20-2015 2:41am]	New Phone Type Not Updated for id 7
+[555bd85c63658]	[exception]	[05-20-2015 2:42am]	New Phone Type Not Updated for id 7
+[555bd864b8cf1]	[exception]	[05-20-2015 2:42am]	New Phone Type Not Updated for id 7
