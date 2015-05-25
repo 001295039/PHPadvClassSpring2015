@@ -1,11 +1,7 @@
 
 <body id="body">
 <div id="header"><?php include('header.php');?></div>
-
-
 <div id="nav"><?php include('nav.php');?></div>
-
-
 <div id="section"><?php include($page_content);?></div>
 <div id="footer"><?php include('footer.php');?></div>
 </body>
