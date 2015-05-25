@@ -1,1 +1,1 @@
-<p>This is page 2.</p>
+<p>This is login page.</p>

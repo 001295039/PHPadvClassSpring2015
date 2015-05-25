@@ -1,5 +1,5 @@
 
-<body>
+<body id="body">
 <div id="header"><?php include('header.php');?></div>
 
 
@@ -14,6 +14,8 @@
 
 
 <style>
+#body{background-color:#e6e6e6;}
+
 #header {
     background-color:black;
     color:white;
