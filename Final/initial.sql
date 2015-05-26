@@ -35,10 +35,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 ------------------------------------------------------------------------------------
 
-CREATE SCHEMA IF NOT EXISTS `FirearmsDB` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+CREATE DATABASE IF NOT EXISTS FirearmsDB ;
 USE `FirearmsDB` ;
 
-CREATE TABLE IF NOT EXISTS `FirearmsDB`.`Firearms` (
+CREATE TABLE IF NOT EXISTS Firearms (
   `idFirearms` INT NOT NULL,
   `name` VARCHAR(45) NULL,
   `caliber` VARCHAR(45) NULL,
