@@ -64,20 +64,23 @@ class gunDAO implements IDAO {
                           ":caliber" => $model->getcaliber(),    
                 ":sernum" => $model->getsernum(),
                          ":manuf" => $model->getmanuf() ,
-                ":price" => $model->getprice()
+                ":price" => $model->getprice(),
+           ":owner_id" => $model->getowner_id()
                     );
                     
          if ( !$this->idExisit($model->getidFirearms()) ) {
              
-             $stmt = $db->prepare("INSERT INTO firearms SET name = :name, caliber = :caliber, sernum = :sernum, manuf = :manuf, price = :price, owner_id = 1, logged = now(), lastupdated = now()");
-             
+             $stmt = $db->prepare("INSERT INTO firearms SET name = :name, caliber = :caliber, sernum = :sernum, manuf = :manuf, price = :price, owner_id = :owner_id");
+           
              if ( $stmt->execute($binds) && $stmt->rowCount() > 0 ) {
-                return true;
+               
+               return true;
               
              }
              else{
-                // var_dump($db->errorInfo());
+                 
              }
+             var_dump($db->errorInfo());
              }
      }
     
@@ -122,27 +125,29 @@ class gunDAO implements IDAO {
      
     
     
-    public function getAllRows() {
+public function getAllRows() {
        
         $values = array();         
         $db = $this->getDB();               
-        $stmt = $db->prepare("SELECT firearms.idFirearms, firearms.name, firearms.caliber, firearms.sernum, firearms.manuf, firearms.price, firearms.logged, firearms.lastupdated"
+        $stmt = $db->prepare("SELECT firearms.idFirearms, firearms.name, firearms.caliber, firearms.sernum, firearms.manuf, firearms.price"
                  . " FROM firearms LEFT JOIN person on firearms.owner_id = person.userid WHERE idFirearms = :idFirearms");
-        
+        var_dump($db->errorInfo());
         if ( $stmt->execute() && $stmt->rowCount() > 0 ) {
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             foreach ($results as $value) {
-               $model = new emailModel();
+               $model = new gunModel();
                $model->reset()->map($value);
                $values[] = $model;
-            }
-             
-        }   else {            
+            }  
+            
+        }
+        else {            
            //log($db->errorInfo() .$stmt->queryString ) ;           
         }  
-        
+           
         $stmt->closeCursor();         
          return $values;
+         
      }
 }

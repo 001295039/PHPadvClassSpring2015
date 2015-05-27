@@ -18,7 +18,7 @@ include './bootstrap.php';
         $serialNum = filter_input(INPUT_POST, 'sernum');
         $manuf = filter_input(INPUT_POST, 'manuf');
         $price = filter_input(INPUT_POST, 'price');
-        $ownerID = filter_input(INPUT_POST, 'ownerid');
+        $ownerID = filter_input(INPUT_POST, 'owner_id');
         
          $gunDAO = new gunDAO($db);
         
@@ -90,6 +90,8 @@ include './bootstrap.php';
               <label>Sale price:</label>
              <input type="text" name="price" value="" placeholder="" />
              <br /><br />
+              <label>owner id:</label>
+              <input type="text" name="owner_id" value="1" readonly="true" placeholder="" />
             <input type="submit" value="Submit" />
         </form>
  

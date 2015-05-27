@@ -21,10 +21,13 @@ class gunModel implements IModel {
     private $sernum;
     private $manuf;
     private $price;
+    private $owner_id;
     private $logged;
     private $lastupdated;
    
-    
+    function getowner_id() {
+        return $this->owner_id;
+    }
     function getidFirearms() {
         return $this->idFirearms;
     }
@@ -93,7 +96,9 @@ class gunModel implements IModel {
     function setActive($active) {
         $this->active = $active;
     }
-    
+     function setowner_id($owner_id) {
+        $this->active = $owner_id;
+    }
     /*
     * When a class has to implement an interface those functions must be created in the class.
     */
@@ -104,6 +109,7 @@ class gunModel implements IModel {
         $this->setsernum('');
         $this->setmanuf('');
         $this->setprice('');
+        $this->setowner_id('');
         $this->setLogged('');
         $this->setLastupdated('');
         $this->setActive('');
@@ -146,6 +152,10 @@ class gunModel implements IModel {
         
         if ( array_key_exists('active', $values) ) {
             $this->setActive($values['active']);
+        }
+          
+        if ( array_key_exists('owner_id', $values) ) {
+            $this->setowner_id($values['owner_id']);
         }
         return $this;
     }
