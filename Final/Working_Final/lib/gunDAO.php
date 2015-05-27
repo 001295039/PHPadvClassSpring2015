@@ -78,9 +78,9 @@ class gunDAO implements IDAO {
               
              }
              else{
-                 
+             var_dump($db->errorInfo());    
              }
-             var_dump($db->errorInfo());
+             
              }
      }
     
@@ -111,12 +111,12 @@ class gunDAO implements IDAO {
     }
     
     
-    public function delete($id) {
+    public function delete($idfirearms) {
           
          $db = $this->getDB();         
          $stmt = $db->prepare("Delete FROM firearms WHERE idfirearms = :idfirearms");
          
-         if ( $stmt->execute(array(':emailid' => $id)) && $stmt->rowCount() > 0 ) {
+         if ( $stmt->execute(array(':idfirearms' => $idfirearms)) && $stmt->rowCount() > 0 ) {
              return true;
          }
          
@@ -129,9 +129,9 @@ public function getAllRows() {
        
         $values = array();         
         $db = $this->getDB();               
-        $stmt = $db->prepare("SELECT firearms.idFirearms, firearms.name, firearms.caliber, firearms.sernum, firearms.manuf, firearms.price"
-                 . " FROM firearms LEFT JOIN person on firearms.owner_id = person.userid WHERE idFirearms = :idFirearms");
-        var_dump($db->errorInfo());
+        $stmt = $db->prepare("SELECT idFirearms, name, caliber, sernum, manuf, price, owner_id"
+                 . " FROM firearms WHERE idFirearms = idFirearms");
+        
         if ( $stmt->execute() && $stmt->rowCount() > 0 ) {
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -143,7 +143,7 @@ public function getAllRows() {
             
         }
         else {            
-           //log($db->errorInfo() .$stmt->queryString ) ;           
+           var_dump($db->errorInfo()); //log($db->errorInfo() .$stmt->queryString ) ;           
         }  
            
         $stmt->closeCursor();         

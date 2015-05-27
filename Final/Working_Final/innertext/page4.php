@@ -50,6 +50,7 @@ include './bootstrap.php';
 <th>Caliber</th>
 <th>Serial Number</th>
 <th>Manufacturer</th>
+<th>Price</th>
 <th>Delete</th>
 <th>Update</th>
 </tr>
@@ -57,5 +58,5 @@ include './bootstrap.php';
             $emails = $gunDAO->getAllRows(); 
             foreach ($emails as $value) 
                 {echo '<tr><td>',$value->getidFirearms(),'</td><td>',$value->getname(),'</td><td>',$value->getcaliber(),'</td><td>', $value->getsernum(),'</td>';
-                 echo  '<td>', $value->getmanuf(),'</td>     <td> <a href=DelEmail.php?emailid=',$value->getEmailid(),'>Delete</a> </td>    <td> <a href=UpdateEmail.php?emailid=',$value->getEmailid(),'>Update</a> </td> </tr>' ;} ?>
+                 echo  '<td>', $value->getmanuf(),'</td><td>', $value->getprice(),'</td>         <td> <a href=page6.php?idFirearms=',$value->getidFirearms(),'>Delete</a> </td>    <td> <a href=page5.php?idFirearms',$value->getidFirearms(),'>Update</a> </td> </tr>' ;} ?>
 </table>

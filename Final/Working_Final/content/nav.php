@@ -5,6 +5,6 @@
 CRUD<br />
 
 <a href="page3.php">Create</a><br />
-<a href="page4.php">Read</a><br />
-<a href="page5.php">Update</a><br />
-<a href="page6.php">Delete</a><br />
+<a href="page4.php">Views/Other CRUD</a><br />
+<!-- <a href="page5.php">Update</a><br />
+<a href="page6.php">Delete</a><br /> -->
