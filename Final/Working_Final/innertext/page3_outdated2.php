@@ -12,15 +12,15 @@ include './bootstrap.php';
         $pdo = new DB($dbConfig);
         $db = $pdo->getDB();
         
-          $idFirearms = filter_input(INPUT_POST, 'idFirearms');
-        $gunName = filter_input(INPUT_POST, 'name');
+        $idFirearms = filter_input(INPUT_POST, 'idFirearms');
+        $gunName = filter_input(INPUT_POST, 'gunName');
         $caliber = filter_input(INPUT_POST, 'caliber');
-        $serialNum = filter_input(INPUT_POST, 'sernum');
+        $serialNum = filter_input(INPUT_POST, 'serialNum');
         $manuf = filter_input(INPUT_POST, 'manuf');
         $price = filter_input(INPUT_POST, 'price');
         $ownerID = filter_input(INPUT_POST, 'ownerid');
         
-         $gunDAO = new gunDAO($db);
+        $gunDAO = new gunDAO($db);
         
          
          
@@ -39,13 +39,13 @@ include './bootstrap.php';
                      $errors[] = 'caliber is invalid';
                 }
                 
-                if ( !$validator->sernumIsValid($serialNum) ) {
+                if ( !$validator->caliberIsValid($serialNum) ) {
                      $errors[] = 'serialNum is invalid';
                 }
-                 if ( !$validator->manufIsValid($manuf) ) {
+                 if ( !$validator->caliberIsValid($manuf) ) {
                      $errors[] = 'manufacturer is invalid';
                 }
-                 if ( !$validator->priceIsValid($price) ) {
+                 if ( !$validator->caliberIsValid($price) ) {
                      $errors[] = 'price is invalid';
                 }
                 
@@ -58,12 +58,12 @@ include './bootstrap.php';
                     
                    
                     
-                  $gunModel = new gunModel();
+                  $emailModel = new emailModel();
                     
-                    $gunModel->map(filter_input_array(INPUT_POST));
+                    $emailModel->map(filter_input_array(INPUT_POST));
                     
                    // var_dump($emailtypeModel);
-                    if ( $gunDAO->create($gunModel) ) {
+                    if ( $gunDAO->create($emailModel) ) {
                         echo 'firearm Added';
                     } else {
                         echo 'firearm not added';
@@ -76,19 +76,19 @@ include './bootstrap.php';
 <h3>Add Firearm</h3>
         <form action="#" method="post">
             <label>Firearm name:</label> 
-            <input type="text" name="name" value="" placeholder="" />
+            <input type="text" name="gunName" value="" placeholder="" />
             <br /><br />
             <label>Caliber:</label>
              <input type="text" name="caliber" value="" placeholder="" />
              <br /><br />
              <label>Serial number:</label>
-             <input type="text" name="sernum" value="" placeholder="" />
+             <input type="text" name="serialNum" value="" placeholder="" />
              <br /><br />
              <label>Manufacturer:</label>
-             <input type="text" name="manuf" value="" placeholder="" />
+             <input type="text" name="manufacturer" value="" placeholder="" />
              <br /><br />
               <label>Sale price:</label>
-             <input type="text" name="price" value="" placeholder="" />
+             <input type="text" name="salePrice" value="" placeholder="" />
              <br /><br />
             <input type="submit" value="Submit" />
         </form>
