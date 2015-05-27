@@ -1,6 +1,4 @@
-
-
-<?php
+<?php 
 include './bootstrap.php';
 ?>
 
@@ -16,45 +14,50 @@ include './bootstrap.php';
         
         $pdo = new DB($dbConfig);
         $db = $pdo->getDB();
-        
+  
         $util = new Util();
-        $emailDAO = new EmailDAO($db);
-        $emailModel = new EmailModel();
+        $gunDAO = new gunDAO($db);
+        $gunModel = new gunModel();
         $validator = new Validator();
         $errors = array();
-        
-        
-        $emailTypes = $emailTypeDAO->getAllRows();
-        
+
         if($util->isPostRequest())
-        {$emailModel->map(filter_input_array(INPUT_POST));}
+        { echo "Mega Tacos";
+            $gunModel->map(filter_input_array(INPUT_POST));}
         else
         {
-            $emailid = filter_input(INPUT_GET, 'emailid');
-            $emailModel = $emailDAO->getById($emailid);
+            $idFirearms = filter_input(INPUT_GET, 'idfirearms');
+            $gunModel = $gunDAO->getById($idFirearms);
         }
-        
-       
-        $emailid = $emailModel->getEmailid();
-        $email = $emailModel->getEmail();
-        $active = $emailModel->getActive();
-        $emailTypeid = $emailModel->getEmailtypeid();
-        $emailType = $emailModel->getEmailtype();
+
+        $idFirearms = $gunModel->getidFirearms();
+        $gunName = $gunModel->getname();
+        $caliber = $gunModel->getcaliber();
+        $serialNum = $gunModel->getsernum();
+        $manuf = $gunModel->getmanuf();
+        $price = $gunModel->getprice();
+        $ownerID = $gunModel->getowner_id();
+
         
         if ($util->isPostRequest())
         {
-            $emailid = filter_input(INPUT_GET, 'emailid');
-            $emailModel = $emailDAO->getById($emailid);
+            $idFirearms = filter_input(INPUT_GET, 'idFirearms');
+            $gunModel = $gunDAO->getById($idFirearms);
             
-            $email = filter_input(INPUT_POST, 'email');
-            $emailtypeid = filter_input(INPUT_POST, 'emailtypeid');
-            $active = filter_input(INPUT_POST, 'active');
+        
+        $gunName = filter_input(INPUT_POST, 'gunName');
+        $caliber = filter_input(INPUT_POST, 'caliber');
+        $serialNum = filter_input(INPUT_POST, 'serialNum');
+        $manuf = filter_input(INPUT_POST, 'manuf');
+        $price = filter_input(INPUT_POST, 'price');
+        $ownerID = filter_input(INPUT_POST, 'ownerid');
             
-            if(!$validator->emailIsValid($email))
-            {$errors[] = 'Email is Invalid.';}
             
-            if(!$validator->activeIsValid($active))
-            {$errors[] = 'Active is invalid';}
+            if(!$validator->gunIsValid($gunName))
+            {$errors[] = 'Firearm is Invalid.';}
+            
+            //if(!$validator->activeIsValid($active))
+            //{$errors[] = 'Active is invalid';}
 
             if(count($errors) > 0 )
             {
@@ -63,43 +66,47 @@ include './bootstrap.php';
             }
             else 
             {
-            if($emailDAO->idExisit($emailModel->getEmailid()))
+            if($gunDAO->idExisit($gunModel->getidFirearms()))
             {
-            $emailModel->map(filter_input_array(INPUT_POST));            
-            if($emailDAO->save($emailModel));
-            {echo "Email Updated.";}
+            $gunModel->map(filter_input_array(INPUT_POST));            
+            if($gunDAO->save($gunModel));
+            {echo "Firearm Updated.";}
             }
             }
         }
         
+        var_dump($idFirearms);
         ?>
         
-        <h3>Update Email</h3>
+        <h3>Update Firearm</h3>
         <form action="#" method="post">
-            <label>Email:</label>            
-            <input type="text" name="email" value="<?php echo $email; ?>" placeholder="" />
             
+            
+            <label>Firearm:</label>            
+            <input type="text" name="gunName" value="<?php echo $gunName; ?>" placeholder="" />
             <br /><br />
             
-            <label>Active:</label>
-            <input type="number" max="1" min="0" name="active" value="<?php echo $active; ?>" />
-            
+            <label>Caliber:</label>
+            <input type="text" name="caliber" value="<?php echo $caliber; ?>" />
             <br /><br />
             
-            <label>Email Type:</label>
-            <select name="emailtypeid">
-            <?php 
-                foreach ($emailTypes as $value) 
-                    {
-                    if ( $value->getEmailtypeid() == $emailTypeid) 
-                    {echo '<option value="',$value->getEmailtypeid(),'" selected="selected">',$value->getEmailtype(),'</option>';  } 
-                    else 
-                        {echo '<option value="',$value->getEmailtypeid(),'">',$value->getEmailtype(),'</option>';}
-                }
-            ?>
-            </select>
+            <label>Serial Number:</label>
+            <input type="text" name="serialNum" value="<?php echo $serialNum; ?>" />
+            <br /><br />
             
-             <br /><br />
+            <label>Manufacturer:</label>
+            <input type="text" name="manuf" value="<?php echo $manuf; ?>" />
+            <br /><br />
+            
+            <label>Price:</label>
+            <input type="text" name="price" value="<?php echo $price; ?>" />
+            <br /><br />
+            
+            <label>Owner ID:</label>
+            <input type="text" name="ownerID" value="<?php echo $ownerID; ?>" />
+            <br /><br />
+
+            
             <input type="submit" value="Submit" />
         </form>
         

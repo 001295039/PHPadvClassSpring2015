@@ -1,19 +1,6 @@
 <?php
-/**
- * PhoneDAO
- * 
- * DAO = Data Access Object
- * 
- * The idea of a Data Access object is a class the will simply execute crud 
- * operations for your database.  We want to be able to create a DAO for each
- * table in your database.
- * 
- * CRUD = (Create Read Update Disable/Delete)
- *
- * @author User
- */
 
-// *** NOTE this class is not complete and does not work
+// *** NOTE this class is not complete and might not work
 class gunDAO implements IDAO {
     
     private $DB = null;
@@ -43,18 +30,19 @@ class gunDAO implements IDAO {
     
     public function getById($id) {
          
-         $model = new emailModel(); // this creates a dependacy, how can we fix this
+         $model = new gunModel(); // this creates a dependacy, how can we fix this
          $db = $this->getDB();
          
-         $stmt = $db->prepare("SELECT firearms.idFirearms, firearms.name, firearms.caliber, firearms.sernum, firearms.manuf, firearms.price, firearms.logged, firearms.lastupdated"
-                 . " FROM firearms LEFT JOIN person on firearms.owner_id = person.userid WHERE idFirearms = :idFirearms");
+         $stmt = $db->prepare("SELECT idFirearms, name, caliber, sernum, manuf, price, owner_id"
+                 . " FROM firearms WHERE idFirearms = :idFirearms");
          
-         if ( $stmt->execute(array(':emailid' => $id)) && $stmt->rowCount() > 0 ) {
+         if ( $stmt->execute(array(':idFirearms' => $id)) && $stmt->rowCount() > 0 ) {
              $results = $stmt->fetch(PDO::FETCH_ASSOC);
              $model->map($results);
          }
-         
+         echo var_dump($results);
          return $model;
+         
     }
      public function create(IModel $model) {
                  
@@ -88,18 +76,18 @@ class gunDAO implements IDAO {
                  
          $db = $this->getDB();
          
-         $binds = array( ":name" => $model->getemail(),
-                          ":active" => $model->getActive(),
-                         ":idFirearms" => $model->getemailTypeid() ,
-                ":sernum" => $model->getemailid(),
-                         ":manuf" => $model->getemailTypeid() ,
-                ":price" => $model->getemailid()
+         $binds = array(":gunName" => $model->getgunName(),
+                        ":caliber" => $model->getcaliber(),
+                        ":serialNum" => $model->getserialNum() ,
+                        ":manuf" => $model->getmanuf(),
+                        ":price" => $model->getprice() ,
+                        ":ownerID" => $model->getownerIDid()
                     );
-         
+
                     var_dump($binds); 
-         if ( $this->idExisit($model->getEmailid()) ) {
+         if ( $this->idExisit($model->getidFirearms()) ) {
             
-             $stmt = $db->prepare("UPDATE email SET email = :email, active = :active, emailtypeid = :emailtypeid WHERE emailid = :emailid");
+             $stmt = $db->prepare("UPDATE firearms SET gunName = :gunName, caliber = :caliber, serialNum = :serialNum, manuf = :manuf, price = :price, ownerID = :ownerID WHERE idFirearms = :idFirearms");
          
              if ( $stmt->execute($binds) && $stmt->rowCount() > 0 ) {
                 return true;
