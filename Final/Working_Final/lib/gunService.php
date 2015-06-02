@@ -11,24 +11,22 @@
  *
  * @author User
  */
-namespace BradS\week2;
-use \PDO;
-class emailService {
+class gunService {
    
     private $_errors = array();
     private $_Util;
     private $_DB;
     private $_Validator;
-    private $_emailTypeDAO;
-    private $_emailModel;
+    private $_gunDAO;
+    private $_gunModel;
 
 
-    public function __construct($db, $util, $validator, $emailDAO, $emailModel) {
+    public function __construct($db, $util, $validator, $gunDAO, $gunModel) {
         $this->_DB = $db;    
         $this->_Util = $util;
         $this->_Validator = $validator;
-        $this->_emailDAO = $emailDAO;
-        $this->_emailModel = $emailModel;
+        $this->_gunDAO = $gunDAO;
+        $this->_gunModel = $gunModel;
     }
 
 
@@ -43,10 +41,10 @@ class emailService {
             $this->displayErrors();
         } else {
             
-            if (  $this->_emailDAO->save($this->_emailModel) ) {
-                echo 'email Added';
+            if (  $this->_gunDAO->save($this->_gunModel) ) {
+                echo 'gun Added';
             } else {
-                echo 'email could not be added Added';
+                echo 'gun could not be added Added';
             }
            
         }
@@ -56,11 +54,8 @@ class emailService {
        
         if ( $this->_Util->isPostRequest() ) {                
             $this->_errors = array();
-            if( !$this->_Validator->emailIsValid($this->_emailModel->getemail()) ) {
-                 $this->_errors[] = 'email is invalid';
-            } 
-            if( !$this->_Validator->activeIsValid($this->_emailModel->getActive()) ) {
-                 $this->_errors[] = 'Active is invalid';
+            if( !$this->_Validator->gunIsValid($this->_gunModel->getidFirearms()) ) {
+                 $this->_errors[] = 'gun is invalid';
             } 
         }
          
@@ -80,16 +75,16 @@ class emailService {
     }
 
 
-    public function displayemails() {        
+    public function displayguns() {        
        
-        $stmt = $this->_DB->prepare("SELECT * FROM email");
+        $stmt = $this->_DB->prepare("SELECT * FROM firearms");
 
         if ($stmt->execute() && $stmt->rowCount() > 0) {
             
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
            
             foreach ($results as $value) {
-                echo '<p>', $value['email'], '</p>';
+                echo '<p>', $value['name'], '</p>';
             }
         } else {
             echo '<p>No Data</p>';

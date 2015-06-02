@@ -1,7 +1,12 @@
 <?php 
 include './bootstrap.php';
 ?>
-
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
 <p>This is the update page.</p>
 
 
@@ -16,17 +21,20 @@ include './bootstrap.php';
         $db = $pdo->getDB();
   
         $util = new Util();
+        $validator = new Validator();
         $gunDAO = new gunDAO($db);
         $gunModel = new gunModel();
-        $validator = new Validator();
+        
         $errors = array();
 
         if($util->isPostRequest())
-        { echo "Mega Tacos";
+        {  
             $gunModel->map(filter_input_array(INPUT_POST));}
         else
         {
-            $idFirearms = filter_input(INPUT_GET, 'idfirearms');
+    
+            $idFirearms = filter_input(INPUT_GET, 'idFirearms');
+    
             $gunModel = $gunDAO->getById($idFirearms);
         }
 
@@ -38,20 +46,18 @@ include './bootstrap.php';
         $price = $gunModel->getprice();
         $ownerID = $gunModel->getowner_id();
 
+         $gunService = new gunService($db, $util, $validator, $gunDAO, $gunModel);
         
-        if ($util->isPostRequest())
-        {
-            $idFirearms = filter_input(INPUT_GET, 'idFirearms');
-            $gunModel = $gunDAO->getById($idFirearms);
-            
+        if ( $gunDAO->idExisit($gunModel->getidFirearms()) ) {
+            $gunService->saveForm();
+        }
         
-        $gunName = filter_input(INPUT_POST, 'gunName');
-        $caliber = filter_input(INPUT_POST, 'caliber');
-        $serialNum = filter_input(INPUT_POST, 'serialNum');
-        $manuf = filter_input(INPUT_POST, 'manuf');
-        $price = filter_input(INPUT_POST, 'price');
-        $ownerID = filter_input(INPUT_POST, 'ownerid');
+          if($gunDAO->save($gunModel))
+            {echo "Firearm Updated.";}
             
+            
+       
+         /*   
             
             if(!$validator->gunIsValid($gunName))
             {$errors[] = 'Firearm is Invalid.';}
@@ -73,9 +79,9 @@ include './bootstrap.php';
             {echo "Firearm Updated.";}
             }
             }
-        }
+        */
         
-        var_dump($idFirearms);
+       // var_dump($idFirearms);
         ?>
         
         <h3>Update Firearm</h3>
@@ -83,7 +89,7 @@ include './bootstrap.php';
             
             
             <label>Firearm:</label>            
-            <input type="text" name="gunName" value="<?php echo $gunName; ?>" placeholder="" />
+            <input type="text" name="name" value="<?php echo $gunName; ?>" placeholder="" />
             <br /><br />
             
             <label>Caliber:</label>
@@ -91,7 +97,7 @@ include './bootstrap.php';
             <br /><br />
             
             <label>Serial Number:</label>
-            <input type="text" name="serialNum" value="<?php echo $serialNum; ?>" />
+            <input type="text" name="sernum" value="<?php echo $serialNum; ?>" />
             <br /><br />
             
             <label>Manufacturer:</label>
@@ -103,9 +109,12 @@ include './bootstrap.php';
             <br /><br />
             
             <label>Owner ID:</label>
-            <input type="text" name="ownerID" value="<?php echo $ownerID; ?>" />
+            <input type="text" name="owner_id" readonly="true" value="0" />
             <br /><br />
 
+            <label>firearm id:</label>
+            <input type="text" name="idFirearms" readonly="true" value="<?php echo $idFirearms; ?>" />
+            <br /><br />
             
             <input type="submit" value="Submit" />
         </form>
@@ -113,3 +122,5 @@ include './bootstrap.php';
         <?php
        echo '<p><a href="page4.php">Back to main</a></p>';
         ?>
+</body>
+</html>

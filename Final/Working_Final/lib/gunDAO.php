@@ -40,7 +40,8 @@ class gunDAO implements IDAO {
              $results = $stmt->fetch(PDO::FETCH_ASSOC);
              $model->map($results);
          }
-         echo var_dump($results);
+      
+          
          return $model;
          
     }
@@ -55,7 +56,7 @@ class gunDAO implements IDAO {
                 ":price" => $model->getprice(),
            ":owner_id" => $model->getowner_id()
                     );
-                    
+                     
          if ( !$this->idExisit($model->getidFirearms()) ) {
              
              $stmt = $db->prepare("INSERT INTO firearms SET name = :name, caliber = :caliber, sernum = :sernum, manuf = :manuf, price = :price, owner_id = :owner_id");
@@ -76,18 +77,18 @@ class gunDAO implements IDAO {
                  
          $db = $this->getDB();
          
-         $binds = array(":gunName" => $model->getgunName(),
+         $binds = array(":idFirearms" => $model->getidFirearms(),
+             ":name" => $model->getname(),
                         ":caliber" => $model->getcaliber(),
-                        ":serialNum" => $model->getserialNum() ,
+                        ":sernum" => $model->getsernum(),
                         ":manuf" => $model->getmanuf(),
                         ":price" => $model->getprice() ,
-                        ":ownerID" => $model->getownerIDid()
+                        ":owner_id" => $model->getowner_id()
                     );
 
-                    var_dump($binds); 
          if ( $this->idExisit($model->getidFirearms()) ) {
             
-             $stmt = $db->prepare("UPDATE firearms SET gunName = :gunName, caliber = :caliber, serialNum = :serialNum, manuf = :manuf, price = :price, ownerID = :ownerID WHERE idFirearms = :idFirearms");
+             $stmt = $db->prepare("UPDATE firearms SET name = :name, caliber = :caliber, sernum = :sernum, manuf = :manuf, price = :price, owner_id = :owner_id WHERE idFirearms = :idFirearms");
          
              if ( $stmt->execute($binds) && $stmt->rowCount() > 0 ) {
                 return true;

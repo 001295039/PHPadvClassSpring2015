@@ -1,4 +1,4 @@
-<?php include './bootstrap.php'; ?>
+  <?php include './bootstrap.php'; ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,10 +7,11 @@
     </head>
     <body>
         <?php
-         $util = new Util();
+        
+            $util = new Util();
             
             if ( $util->isPostRequest() ) {
-               $dbConfig = array(
+                $dbConfig = array(
     "DB_DNS"=>'mysql:host=localhost;port=3306;dbname=FirearmsDB',
     "DB_USER"=>'root',
     "DB_PASSWORD"=>''
@@ -24,23 +25,24 @@
                 $signupDao = new SignupDAO($db, $model);            
                 $model->map(filter_input_array(INPUT_POST));
                                 
-                if ( $signupDao->login($model) ) {
-                    echo '<h2>Login Sucess</h2>';
-                    $util->setLoggedin(true);
-                    $util->redirect('is-logged-in.php');
+                if ( $signupDao->create($model) ) {
+                    echo '<h2>Signup complete</h2>';
                 } else {
-                    echo '<h2>Login Failed</h2>';
+                    echo '<h2>Signup Failed</h2>';
                 }
             }
+           
+            
         ?>
-        <p>This is login.</p>
-         <h1>Login</h1>
+        
+        <h1>Signup</h1>
         <form action="#" method="POST">
             
-            username : <input type="text" name="name" value="" /> <br />
+            username: <input type="text" name="name" value="" /> <br />
             Password : <input type="password" name="level" value="" /> <br /> 
             <br />
-            <input type="submit" value="login" />
+            <input type="submit" value="Signup" />
             
         </form>
-         
+    </body>
+</html>
