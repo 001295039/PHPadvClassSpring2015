@@ -7,9 +7,9 @@
  */
 
 /**
- * Description of PhoneTypeService
+ * Description of gunService
  *
- * @author User
+ * @author Brad and Carl
  */
 class gunService {
    
@@ -30,7 +30,8 @@ class gunService {
     }
 
 
-    public function saveForm() {        
+    public function saveForm() {  
+    // Update validation   
         if ( !$this->_Util->isPostRequest() ) {
             return false;
         }
@@ -40,8 +41,9 @@ class gunService {
         if ( $this->hasErrors() ) {
             $this->displayErrors();
         } else {
-            
+            //Checks to see if it updated properly
             if (  $this->_gunDAO->save($this->_gunModel) ) {
+                //echo's out statements to the user 
                 echo 'gun Added';
             } else {
                 echo 'gun could not be added Added';
@@ -51,7 +53,7 @@ class gunService {
         
     }
     public function validateForm() {
-       
+       //Validation
         if ( $this->_Util->isPostRequest() ) {                
             $this->_errors = array();
             if( !$this->_Validator->gunIsValid($this->_gunModel->getidFirearms()) ) {
@@ -63,26 +65,27 @@ class gunService {
     
     
     public function displayErrors() {
-       
+       //Error Display
         foreach ($this->_errors as $value) {
             echo '<p>',$value,'</p>';
         }
          
     }
     
-    public function hasErrors() {        
+    public function hasErrors() {   
+        //checks to see if there are errors
         return ( count($this->_errors) > 0 );        
     }
 
 
     public function displayguns() {        
-       
+       //Displays firearms
         $stmt = $this->_DB->prepare("SELECT * FROM firearms");
 
         if ($stmt->execute() && $stmt->rowCount() > 0) {
             
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-           
+           //Echo's out values
             foreach ($results as $value) {
                 echo '<p>', $value['name'], '</p>';
             }

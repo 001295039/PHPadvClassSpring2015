@@ -1,4 +1,4 @@
-
+<?php //loads everything for the page ?>
 <body id="body">
 <div id="header"><?php include('header.php');?></div>
 <div id="nav"><?php include('nav.php');?></div>
